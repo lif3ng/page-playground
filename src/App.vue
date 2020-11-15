@@ -1,27 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1>Editor</h1>
+    <Editor>
+      some text
+      <div>
+        a div
+        <h1 style="color: blue">h1</h1>
+      </div>
+    </Editor>
+    <hr />
+    <h1>Preview</h1>
+    <Preview />
+    <hr />
+    <h1>Playground (Editor + Preview)</h1>
+    <Playground />
   </div>
 </template>
-
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Editor from "./components/Editor.vue";
+import Preview from "./components/Preview.vue";
+import Playground from "./components/Playground.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
-  }
+    Editor,
+    Preview,
+    Playground,
+  },
 };
 </script>
-
-<style lang="stylus">
-#app
-  font-family Avenir, Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
-</style>

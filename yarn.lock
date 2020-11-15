@@ -865,6 +865,25 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@codemirror/next@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.npm.taobao.org/@codemirror/next/download/@codemirror/next-0.14.0.tgz#afaa9cd5c7f9ee948bb197a7d430e9d166c74b81"
+  integrity sha1-r6qc1cf57pSLsZen1DDp0WbHS4E=
+  dependencies:
+    lezer "^0.12.0"
+    lezer-cpp "^0.12.0"
+    lezer-css "^0.12.0"
+    lezer-html "^0.12.0"
+    lezer-java "^0.12.0"
+    lezer-javascript "^0.12.0"
+    lezer-json "^0.12.0"
+    lezer-python "^0.12.0"
+    lezer-rust "^0.12.0"
+    lezer-tree "^0.12.0"
+    lezer-xml "^0.12.0"
+    style-mod "^3.0.0"
+    w3c-keyname "^2.2.4"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.npm.taobao.org/@hapi/address/download/@hapi/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -6382,6 +6401,81 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+lezer-cpp@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npm.taobao.org/lezer-cpp/download/lezer-cpp-0.12.0.tgz#904295ff3ecf37fcbcd8815be71809ad00777744"
+  integrity sha1-kEKV/z7PN/y82IFb5xgJrQB3d0Q=
+  dependencies:
+    lezer "^0.12.0"
+
+lezer-css@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npm.taobao.org/lezer-css/download/lezer-css-0.12.0.tgz#17029edb6567e7ec22b4e144d482c03ba0c1bc04"
+  integrity sha1-FwKe22Vn5+witOFE1ILAO6DBvAQ=
+  dependencies:
+    lezer "^0.12.0"
+
+lezer-html@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npm.taobao.org/lezer-html/download/lezer-html-0.12.0.tgz#e899cd29af48443d4e7ac4764343ae39fc3a812e"
+  integrity sha1-6JnNKa9IRD1OesR2Q0OuOfw6gS4=
+  dependencies:
+    lezer "^0.12.0"
+
+lezer-java@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npm.taobao.org/lezer-java/download/lezer-java-0.12.0.tgz#f0c6b645198b522a85fbb8095cc79e69cbff0bc9"
+  integrity sha1-8Ma2RRmLUiqF+7gJXMeeacv/C8k=
+  dependencies:
+    lezer "^0.12.0"
+
+lezer-javascript@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npm.taobao.org/lezer-javascript/download/lezer-javascript-0.12.0.tgz#bc02d3694906ec1e63329e4eb63ab618e454e263"
+  integrity sha1-vALTaUkG7B5jMp5Otjq2GORU4mM=
+  dependencies:
+    lezer "^0.12.0"
+
+lezer-json@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npm.taobao.org/lezer-json/download/lezer-json-0.12.0.tgz#def3d18aa296e761cb41f67125c8042472013f42"
+  integrity sha1-3vPRiqKW52HLQfZxJcgEJHIBP0I=
+  dependencies:
+    lezer "^0.12.0"
+
+lezer-python@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npm.taobao.org/lezer-python/download/lezer-python-0.12.0.tgz#f39bbc392f5f421de744286c70b8b887a5b60c57"
+  integrity sha1-85u8OS9fQh3nRChscLi4h6W2DFc=
+  dependencies:
+    lezer "^0.12.0"
+
+lezer-rust@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npm.taobao.org/lezer-rust/download/lezer-rust-0.12.0.tgz#e7e85ed48f0fac897832afa775a975a2846d27e4"
+  integrity sha1-5+he1I8PrIl4Mq+ndal1ooRtJ+Q=
+  dependencies:
+    lezer "^0.12.0"
+
+lezer-tree@^0.12.0:
+  version "0.12.3"
+  resolved "https://registry.npm.taobao.org/lezer-tree/download/lezer-tree-0.12.3.tgz#41abec350449712927657fbd6b506c34b48df594"
+  integrity sha1-QavsNQRJcSknZX+9a1BsNLSN9ZQ=
+
+lezer-xml@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npm.taobao.org/lezer-xml/download/lezer-xml-0.12.0.tgz#c26658c03266b7bffaf2f8a6bf106f175f962a98"
+  integrity sha1-wmZYwDJmt7/68vimvxBvF1+WKpg=
+  dependencies:
+    lezer "^0.12.0"
+
+lezer@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.npm.taobao.org/lezer/download/lezer-0.12.0.tgz#43b3c1d915e6b7191f104aea233039c39f7f74a3"
+  integrity sha1-Q7PB2RXmtxkfEErqIzA5w59/dKM=
+  dependencies:
+    lezer-tree "^0.12.0"
+
 lines-and-columns@^1.1.6:
   version "1.1.6"
   resolved "https://registry.npm.taobao.org/lines-and-columns/download/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
@@ -9150,6 +9244,11 @@ strip-json-comments@^3.0.1:
   resolved "https://registry.npm.taobao.org/strip-json-comments/download/strip-json-comments-3.1.1.tgz?cache=0&sync_timestamp=1594569907314&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fstrip-json-comments%2Fdownload%2Fstrip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha1-MfEoGzgyYwQ0gxwxDAHMzajL4AY=
 
+style-mod@^3.0.0:
+  version "3.1.0"
+  resolved "https://registry.npm.taobao.org/style-mod/download/style-mod-3.1.0.tgz#70b50ee3b763517470669226a8a728269ab5c039"
+  integrity sha1-cLUO47djUXRwZpImqKcoJpq1wDk=
+
 stylehacks@^4.0.0:
   version "4.0.3"
   resolved "https://registry.npm.taobao.org/stylehacks/download/stylehacks-4.0.3.tgz?cache=0&sync_timestamp=1603213132191&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fstylehacks%2Fdownload%2Fstylehacks-4.0.3.tgz#6718fcaf4d1e07d8a1318690881e8d96726a71d5"
@@ -9865,6 +9964,11 @@ w3c-hr-time@^1.0.1:
   integrity sha1-ConN9cwVgi35w2BUNnaWPgzDCM0=
   dependencies:
     browser-process-hrtime "^1.0.0"
+
+w3c-keyname@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.npm.taobao.org/w3c-keyname/download/w3c-keyname-2.2.4.tgz#4ade6916f6290224cdbd1db8ac49eab03d0eef6b"
+  integrity sha1-St5pFvYpAiTNvR24rEnqsD0O72s=
 
 w3c-xmlserializer@^1.1.2:
   version "1.1.2"

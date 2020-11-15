@@ -1,14 +1,16 @@
 {
-  "name": "html-preview",
+  "name": "page-playground",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-wc": "vue-cli-service build --target wc --name html 'src/components/*.vue'",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@codemirror/next": "^0.14.0",
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
