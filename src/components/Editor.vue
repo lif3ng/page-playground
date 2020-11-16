@@ -26,12 +26,8 @@ export default {
     this.view = new EditorView({
       state: startState,
       parent: this.$refs.editor,
-      // config: {
-      //   state: startState,
-      //   // root: ShadowRoot,
-      // },
+      root: this.$parent.$options.shadowRoot || document,
     });
-    console.log(this.view);
   },
   methods: {
     vNodeToHtml(vNode) {
