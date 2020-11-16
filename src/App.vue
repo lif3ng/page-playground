@@ -10,10 +10,22 @@
     </Editor>
     <hr />
     <h1>Preview</h1>
-    <Preview />
+    <Preview>
+      some text
+      <div>
+        a div
+        <h1 style="color: blue">h1</h1>
+      </div>
+    </Preview>
     <hr />
     <h1>Playground (Editor + Preview)</h1>
-    <Playground />
+    <Playground>
+      some text
+      <div>
+        a div
+        <h1 style="color: blue">h1</h1>
+      </div>
+    </Playground>
   </div>
 </template>
 <script>

@@ -1,14 +1,5 @@
 <template>
   <div>
-    preview
-    <div ref="editor" />
+    <slot />
   </div>
 </template>
-<script>
-// import x from "@codemirror/next";
-export default {
-  mounted() {
-    console.log("mounted");
-  },
-};
-</script>
