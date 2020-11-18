@@ -1,7 +1,15 @@
 <template>
-  <div class="playground">
+  <div :class="['playground', { fullscreen }]">
+    <ContralBar
+      class="control"
+      @format="handleFormat"
+      @fullscreen="handleFullScreen(true)"
+      @exit_fullscreen="handleFullScreen(false)"
+    />
     <div>
-      <Editor class="editor" @change="handleChange"><slot /></Editor>
+      <Editor class="editor" @change="handleChange" ref="editor"
+        ><slot
+      /></Editor>
     </div>
     <div>
       <Preview
@@ -23,12 +31,14 @@
 <script>
 import Editor from "./Editor";
 import Preview from "./Preview";
+import ContralBar from "./ControlBar";
 import getRootMixin from "../getRootMixin";
 export default {
   mixins: [getRootMixin],
-  components: { Editor, Preview },
+  components: { Editor, Preview, ContralBar },
   data() {
     return {
+      fullscreen: false,
       previewHtml: "",
       demoNum: parseInt(Math.random() * 1000000000),
     };
@@ -64,20 +74,48 @@ export default {
     handleChange(html) {
       this.previewHtml = html;
     },
+    handleFullScreen(status) {
+      this.fullscreen = status;
+      if (status) {
+        this.$el.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    },
+    handleFormat() {
+      this.$refs.editor.format();
+    },
   },
 };
 </script>
 <style lang="stylus" scoped>
 .playground {
   display: flex;
-
-  div {
+  padding-top:30px
+  position:relative
+  .control{
+    position: absolute
+    top 0
+  }
+  >div {
     flex: 1;
     width: 100%;
-
-    + div {
+    outline 1px solid #ccc
+    &:last-child {
       margin-left: 10px;
     }
+  }
+  >>>.exit_fullscreen{
+    display:none
+  }
+  &:fullscreen{
+    background:#fff
+    >>>.fullscreen{
+      display:none
+    }
+    >>>.exit_fullscreen{
+    display:inline-block
+  }
   }
 }
 </style>

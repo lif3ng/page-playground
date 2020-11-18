@@ -19,7 +19,7 @@ import getRootMixin from "../getRootMixin";
 export default {
   mixins: [getRootMixin],
   mounted() {
-    const htmlStr = format(this.$refs.originSlot.innerHTML);
+    console.log(this);
     let startState = EditorState.create({
       doc: "",
       extensions: [
@@ -42,10 +42,22 @@ export default {
       parent: this.$refs.editor,
       root: this.getRoot(),
     });
-    const newState = this.view.state.update({
-      changes: { from: 0, insert: htmlStr },
-    });
-    this.view.dispatch(newState);
+    const htmlStr = format(this.$refs.originSlot.innerHTML);
+    this.format(htmlStr);
+  },
+  methods: {
+    currentCode() {
+      return this.view.state.doc.toString();
+    },
+    format(str) {
+      const originCode = str || this.currentCode();
+      const currentLen = this.view.state.doc.length;
+      const targetCode = format(originCode);
+      const newState = this.view.state.update({
+        changes: { from: 0, to: currentLen, insert: targetCode },
+      });
+      this.view.dispatch(newState);
+    },
   },
 };
 </script>
