@@ -5,6 +5,7 @@
       @format="handleFormat"
       @fullscreen="handleFullScreen(true)"
       @exit_fullscreen="handleFullScreen(false)"
+      :btns="['format', 'fullscreen']"
     />
     <div>
       <Editor class="editor" @change="handleChange" ref="editor"

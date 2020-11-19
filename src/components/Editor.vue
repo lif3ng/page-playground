@@ -1,5 +1,7 @@
 <template>
-  <div ref="editor">
+  <div>
+    <ControlBar v-if="bar" @format="format" />
+    <div ref="editor"></div>
     <div ref="originSlot" style="display: none"><slot /></div>
   </div>
 </template>
@@ -14,10 +16,21 @@ import {
 } from "@codemirror/next/basic-setup";
 import { StateField } from "@codemirror/next/state";
 import { html } from "@codemirror/next/lang-html";
+import { css } from "@codemirror/next/lang-css";
+import ControlBar from "./ControlBar";
 import { format } from "../utils";
 import getRootMixin from "../getRootMixin";
 export default {
   mixins: [getRootMixin],
+  components: { ControlBar },
+  props: {
+    lang: {
+      default: "html",
+    },
+    bar: {
+      type: Boolean,
+    },
+  },
   mounted() {
     console.log(this);
     let startState = EditorState.create({
@@ -34,7 +47,8 @@ export default {
           },
         }),
         basicSetup,
-        html(),
+        ...(this.lang === "html" ? [html()] : []),
+        ...(this.lang === "css" ? [css()] : []),
       ],
     });
     this.view = new EditorView({
@@ -42,7 +56,7 @@ export default {
       parent: this.$refs.editor,
       root: this.getRoot(),
     });
-    const htmlStr = format(this.$refs.originSlot.innerHTML);
+    const htmlStr = this.$refs.originSlot.innerHTML;
     this.format(htmlStr);
   },
   methods: {
@@ -52,7 +66,7 @@ export default {
     format(str) {
       const originCode = str || this.currentCode();
       const currentLen = this.view.state.doc.length;
-      const targetCode = format(originCode);
+      const targetCode = format(originCode, this.lang);
       const newState = this.view.state.update({
         changes: { from: 0, to: currentLen, insert: targetCode },
       });

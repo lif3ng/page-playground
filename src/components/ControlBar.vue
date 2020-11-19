@@ -28,7 +28,7 @@ const btnConfig = {
 export default {
   props: {
     btns: {
-      default: () => ["format", "fullscreen"],
+      default: () => ["format"],
       type: Array,
     },
   },

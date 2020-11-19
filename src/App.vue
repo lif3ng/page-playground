@@ -1,12 +1,15 @@
 <template>
   <div id="app">
     <h1>Editor</h1>
-    <Editor>
+    <Editor bar>
       some text
       <div>
         a div
         <h1 style="color: blue">h1</h1>
       </div>
+    </Editor>
+    <Editor lang="css" bar>
+      a{ background:blue }
     </Editor>
     <hr />
     <h1>Preview</h1>
