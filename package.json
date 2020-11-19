@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-wc": "vue-cli-service build --target wc --name html src/components/*.vue",
+    "build-wc": "vue-cli-service build --target wc --name html 'src/components/*.vue'",
+    "build-for-examples": "yarn build-wc && node scripts/forVercel",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },

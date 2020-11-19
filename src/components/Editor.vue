@@ -32,7 +32,12 @@ export default {
     },
   },
   mounted() {
-    console.log(this);
+    this.$nextTick(() => {
+      const style = this.$refs.originSlot.querySelectorAll("style");
+      style.forEach(({ sheet }) => {
+        sheet.disabled = true;
+      });
+    });
     let startState = EditorState.create({
       doc: "",
       extensions: [
