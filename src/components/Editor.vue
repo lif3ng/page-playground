@@ -30,6 +30,9 @@ export default {
     bar: {
       type: Boolean,
     },
+    code: {
+      default: "",
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -61,8 +64,9 @@ export default {
       parent: this.$refs.editor,
       root: this.getRoot(),
     });
-    const htmlStr = this.$refs.originSlot.innerHTML;
-    this.format(htmlStr);
+    const codeStr = this.$refs.originSlot.innerHTML || this.code;
+    console.log({ codeStr });
+    this.format(codeStr);
   },
   methods: {
     currentCode() {

@@ -29,6 +29,10 @@
         <h1 style="color: blue">h1</h1>
       </div>
     </Playground>
+    <Playground
+      html="<div>a</div><style>div{color:blue}</style>"
+      css="div{background:red}"
+    />
   </div>
 </template>
 <script>

@@ -5,6 +5,13 @@
 </template>
 <script>
 export default {
-  props: ["demoNum"],
+  props: ["demoNum", "css"],
+  mounted() {
+    console.log(+new Date(), "preview el", this.$el, this.$el.getRootNode());
+
+    this.$nextTick(() => {
+      console.log(+new Date(), "preview el", this.$el, this.$el.getRootNode());
+    });
+  },
 };
 </script>

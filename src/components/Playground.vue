@@ -1,5 +1,5 @@
 <template>
-  <div :class="['playground', { fullscreen }]">
+  <div class="playground">
     <ContralBar
       class="control"
       @format="handleFormat"
@@ -8,9 +8,22 @@
       :btns="['format', 'fullscreen']"
     />
     <div>
-      <Editor class="editor" @change="handleChange" ref="editor"
-        ><slot
-      /></Editor>
+      <Editor
+        class="editor"
+        @change="handleChange"
+        ref="editor"
+        v-if="$slots.default"
+      >
+        <slot />
+      </Editor>
+      <Editor
+        v-else
+        :code="html"
+        class="editor"
+        @change="handleChange"
+        ref="editor"
+      />
+      <Editor lang="css" :code="cssCode" class="editor" />
     </div>
     <div>
       <Preview
@@ -19,6 +32,7 @@
         ref="previewDom"
         :demoNum="demoNum"
         v-html="previewHtml"
+        :css="cssCode"
       />
       <html-preview
         class="preview"
@@ -37,37 +51,63 @@ import getRootMixin from "../getRootMixin";
 export default {
   mixins: [getRootMixin],
   components: { Editor, Preview, ContralBar },
+  props: {
+    html: {
+      default: "",
+    },
+    css: {
+      default: "",
+    },
+  },
   data() {
     return {
-      fullscreen: false,
       previewHtml: "",
       demoNum: parseInt(Math.random() * 1000000000),
+      styleInHtml: "",
     };
   },
   computed: {
     isDev() {
       return process.env.NODE_ENV === "development";
     },
+    cssCode() {
+      return this.styleInHtml + this.css;
+    },
+  },
+  mounted() {
+    console.log(this);
+    console.log(this.$slots.default);
   },
   watch: {
+    cssCode: {
+      immediate: true,
+      handler(css) {
+        console.log("csscode", css);
+      },
+    },
     previewHtml() {
       this.$nextTick(() => {
+        const cssRuleArr = [];
         if (this.isDev) {
           // dom
           const style = this.$refs.previewDom.$el.querySelectorAll("style");
-          Array.from(style).forEach(({ sheet: { rules } }) => {
+          console.log({ style });
+          Array.from(style).forEach(({ sheet: { rules }, innerText }) => {
             // sheet.disabled = true;
             rules.forEach((rule) => {
               rule.selectorText = `#demo-${this.demoNum} ${rule.selectorText}`;
             });
+            cssRuleArr.push(innerText);
           });
         } else {
           // web component
           const style = this.$refs.previewShadow.querySelectorAll("style");
-          Array.from(style).forEach(({ sheet }) => {
+          Array.from(style).forEach(({ sheet, innerText }) => {
             sheet.disabled = true;
+            cssRuleArr.push(innerText);
           });
         }
+        this.styleInHtml = cssRuleArr.join("");
       });
     },
   },
@@ -76,7 +116,6 @@ export default {
       this.previewHtml = html;
     },
     handleFullScreen(status) {
-      this.fullscreen = status;
       if (status) {
         this.$el.requestFullscreen();
       } else {

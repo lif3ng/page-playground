@@ -34,17 +34,12 @@ export default {
   },
   data() {
     return {
-      fullscreen: false,
+      // fullscreen: false,
     };
   },
   methods: {
     handleClick(type) {
       this.$emit(type);
-      if (type === "fullscreen") {
-        this.fullscreen = true;
-      } else if (type === "exit_fullscreen") {
-        this.fullscreen = false;
-      }
     },
   },
   computed: {
@@ -58,7 +53,6 @@ export default {
       const fullScreenBtnIndex = btns.findIndex(
         ({ type }) => type === "fullscreen"
       );
-      console.log({ fullScreenBtnIndex });
       if (fullScreenBtnIndex !== -1) {
         btns.splice(fullScreenBtnIndex, 0, {
           type: "exit_fullscreen",
