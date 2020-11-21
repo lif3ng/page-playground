@@ -6,12 +6,40 @@
 <script>
 export default {
   props: ["demoNum", "css"],
+  data() {
+    return { adoptedStyleSheetIndex: -1 };
+  },
   mounted() {
-    console.log(+new Date(), "preview el", this.$el, this.$el.getRootNode());
-
     this.$nextTick(() => {
-      console.log(+new Date(), "preview el", this.$el, this.$el.getRootNode());
+      // console.log(+new Date(), "preview el", this.$el, this.$el.getRootNode());
     });
+  },
+  methods: {
+    renderCss(str) {
+      const sheet = new CSSStyleSheet();
+      sheet.replaceSync(str);
+      sheet.rules.forEach((rule) => {
+        rule.selectorText = `#demo-${this.demoNum} ${rule.selectorText}`;
+      });
+      const sheets = document.adoptedStyleSheets;
+      if (this.adoptedStyleSheetIndex !== -1) {
+        document.adoptedStyleSheets = [
+          ...sheets.slice(0, this.adoptedStyleSheetIndex),
+          sheet,
+          ...sheets.slice(this.adoptedStyleSheetIndex + 1, sheets.length),
+        ];
+      } else {
+        document.adoptedStyleSheets = [...sheets, sheet];
+        this.adoptedStyleSheetIndex = document.adoptedStyleSheets.indexOf(
+          sheet
+        );
+      }
+    },
+  },
+  watch: {
+    css(css) {
+      this.renderCss(css);
+    },
   },
 };
 </script>

@@ -5,25 +5,36 @@
       @format="handleFormat"
       @fullscreen="handleFullScreen(true)"
       @exit_fullscreen="handleFullScreen(false)"
-      :btns="['format', 'fullscreen']"
+      @save="handleSave"
+      :btns="['format', 'fullscreen', 'save']"
     />
     <div>
+      <h2>html</h2>
       <Editor
         class="editor"
         @change="handleChange"
-        ref="editor"
+        ref="htmlEditor"
         v-if="$slots.default"
       >
         <slot />
       </Editor>
+
       <Editor
         v-else
         :code="html"
         class="editor"
+        ref="htmlEditor"
         @change="handleChange"
-        ref="editor"
       />
-      <Editor lang="css" :code="cssCode" class="editor" />
+      <h2>css</h2>
+
+      <Editor
+        lang="css"
+        :code="css"
+        class="editor"
+        ref="cssEditor"
+        @change="handleCssChange"
+      />
     </div>
     <div>
       <Preview
@@ -32,7 +43,7 @@
         ref="previewDom"
         :demoNum="demoNum"
         v-html="previewHtml"
-        :css="cssCode"
+        :css="cssToRender"
       />
       <html-preview
         class="preview"
@@ -64,34 +75,31 @@ export default {
       previewHtml: "",
       demoNum: parseInt(Math.random() * 1000000000),
       styleInHtml: "",
+      cssToRender: "",
     };
   },
   computed: {
     isDev() {
       return process.env.NODE_ENV === "development";
     },
-    cssCode() {
+    allCssCode() {
       return this.styleInHtml + this.css;
     },
   },
-  mounted() {
-    console.log(this);
-    console.log(this.$slots.default);
-  },
+  mounted() {},
   watch: {
-    cssCode: {
-      immediate: true,
-      handler(css) {
-        console.log("csscode", css);
-      },
-    },
+    // cssCode: {
+    //   immediate: true,
+    //   handler(css) {
+    //     console.log("csscode", css);
+    //   },
+    // },
     previewHtml() {
       this.$nextTick(() => {
         const cssRuleArr = [];
         if (this.isDev) {
-          // dom
+          // vue dom
           const style = this.$refs.previewDom.$el.querySelectorAll("style");
-          console.log({ style });
           Array.from(style).forEach(({ sheet: { rules }, innerText }) => {
             // sheet.disabled = true;
             rules.forEach((rule) => {
@@ -115,6 +123,9 @@ export default {
     handleChange(html) {
       this.previewHtml = html;
     },
+    handleCssChange(css) {
+      this.cssToRender = css;
+    },
     handleFullScreen(status) {
       if (status) {
         this.$el.requestFullscreen();
@@ -123,7 +134,16 @@ export default {
       }
     },
     handleFormat() {
-      this.$refs.editor.format();
+      this.$refs.htmlEditor.format();
+      this.$refs.cssEditor.format();
+    },
+    handleSave() {
+      this.handleFormat();
+      const data = {
+        html: this.$refs.htmlEditor.currentCode(),
+        css: this.$refs.cssEditor.currentCode(),
+      };
+      this.$emit("save", data);
     },
   },
 };
@@ -131,31 +151,38 @@ export default {
 <style lang="stylus" scoped>
 .playground {
   display: flex;
-  padding-top:30px
-  position:relative
-  .control{
-    position: absolute
-    top 0
+  padding-top: 30px;
+  position: relative;
+
+  .control {
+    position: absolute;
+    top: 0;
   }
+
   >div {
     flex: 1;
     width: 100%;
-    outline 1px solid #ccc
+    outline: 1px solid #ccc;
+
     &:last-child {
       margin-left: 10px;
     }
   }
-  >>>.exit_fullscreen{
-    display:none
+
+  >>>.exit_fullscreen {
+    display: none;
   }
-  &:fullscreen{
-    background:#fff
-    >>>.fullscreen{
-      display:none
+
+  &:fullscreen {
+    background: #fff;
+
+    >>>.fullscreen {
+      display: none;
     }
-    >>>.exit_fullscreen{
-    display:inline-block
-  }
+
+    >>>.exit_fullscreen {
+      display: inline-block;
+    }
   }
 }
 </style>

@@ -65,7 +65,6 @@ export default {
       root: this.getRoot(),
     });
     const codeStr = this.$refs.originSlot.innerHTML || this.code;
-    console.log({ codeStr });
     this.format(codeStr);
   },
   methods: {
