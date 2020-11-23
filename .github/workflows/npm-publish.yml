@@ -15,12 +15,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: https://npm.pkg.github.com
+          registry-url: https://npm.pkg.github.com/lif3ng
       - run: yarn
       - run: yarn build-plugin
 #       - run: npm test
       - run: npm config list
-      - run: npm publish --registry https://npm.pkg.github.com/lif3ng
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
