@@ -41,8 +41,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: https://npm.pkg.github.com/lif3ng
+          registry-url: https://npm.pkg.github.com
+          scope: '@lifeng' 
 #       - run: npm ci
+      - run: cat .npmrc
+      - run: cat ~/.npmrc
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
