@@ -20,7 +20,7 @@ jobs:
       - run: yarn build-plugin
 #       - run: npm test
       - run: npm config list
-      - run: npm publish --registry https://npm.pkg.github.com/lif3ng/page-playground
+      - run: npm publish --registry https://npm.pkg.github.com/lif3ng
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
