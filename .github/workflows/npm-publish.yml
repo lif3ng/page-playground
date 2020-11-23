@@ -44,7 +44,7 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: '@lifeng' 
 #       - run: npm ci
-      - run: cat .npmrc
+#       - run: cat .npmrc
       - run: cat ~/.npmrc
       - run: npm publish
         env:
