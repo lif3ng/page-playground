@@ -20,7 +20,9 @@ jobs:
           registry-url: https://npm.pkg.github.com/lif3ng
       - run: echo ${NPM_CONFIG_USERCONFIG}
       - run: cat  ${NPM_CONFIG_USERCONFIG}
+      - run: ls -al ${NPM_CONFIG_USERCONFIG}
       - run: rm  ${NPM_CONFIG_USERCONFIG}
+      - run: ls -al ${NPM_CONFIG_USERCONFIG}
       - uses: actions/setup-node@v1
         with:
           node-version: 12
