@@ -12,11 +12,13 @@ jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${NPM_CONFIG_USERCONFIG}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/lif3ng
+      - run: echo ${NPM_CONFIG_USERCONFIG}  
       - run: yarn
       - run: yarn build-plugin
 #       - run: npm test
