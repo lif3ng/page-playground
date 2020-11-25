@@ -26,6 +26,7 @@ const btnConfig = {
   },
 };
 export default {
+  name: "ControlBar",
   props: {
     btns: {
       default: () => ["format"],

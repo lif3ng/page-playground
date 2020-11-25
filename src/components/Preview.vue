@@ -5,6 +5,7 @@
 </template>
 <script>
 export default {
+  name: "Preview",
   props: ["demoNum", "css"],
   data() {
     return { adoptedStyleSheetIndex: -1 };

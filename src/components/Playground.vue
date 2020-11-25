@@ -37,19 +37,19 @@
       />
     </div>
     <div>
+      <html-preview
+        class="preview"
+        ref="previewShadow"
+        v-if="isWc"
+        v-html="previewHtml"
+      />
       <Preview
         class="preview"
-        v-if="isDev"
+        v-else
         ref="previewDom"
         :demoNum="demoNum"
         v-html="previewHtml"
         :css="cssToRender"
-      />
-      <html-preview
-        class="preview"
-        ref="previewShadow"
-        v-else
-        v-html="previewHtml"
       />
     </div>
   </div>
@@ -60,6 +60,7 @@ import Preview from "./Preview";
 import ContralBar from "./ControlBar";
 import getRootMixin from "../getRootMixin";
 export default {
+  name: "Playground",
   mixins: [getRootMixin],
   components: { Editor, Preview, ContralBar },
   props: {
@@ -79,8 +80,8 @@ export default {
     };
   },
   computed: {
-    isDev() {
-      return process.env.NODE_ENV === "development";
+    isWc() {
+      return process.env.NODE_ENV === "wc";
     },
     allCssCode() {
       return this.styleInHtml + this.css;
@@ -97,7 +98,7 @@ export default {
     previewHtml() {
       this.$nextTick(() => {
         const cssRuleArr = [];
-        if (this.isDev) {
+        if (!this.isWc) {
           // vue dom
           const style = this.$refs.previewDom.$el.querySelectorAll("style");
           Array.from(style).forEach(({ sheet: { rules }, innerText }) => {

@@ -21,6 +21,7 @@ import ControlBar from "./ControlBar";
 import { format } from "../utils";
 import getRootMixin from "../getRootMixin";
 export default {
+  name: "Editor",
   mixins: [getRootMixin],
   components: { ControlBar },
   props: {
