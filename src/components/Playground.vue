@@ -6,35 +6,37 @@
       @fullscreen="handleFullScreen(true)"
       @exit_fullscreen="handleFullScreen(false)"
       @save="handleSave"
-      :btns="['format', 'fullscreen', 'save']"
+      :btns="wrapperControlBtns"
     />
     <div>
-      <h2>html</h2>
-      <Editor
-        class="editor"
-        @change="handleChange"
-        ref="htmlEditor"
-        v-if="$slots.default"
-      >
-        <slot />
-      </Editor>
-
-      <Editor
-        v-else
-        :code="html"
-        class="editor"
-        ref="htmlEditor"
-        @change="handleChange"
-      />
-      <h2>css</h2>
-
-      <Editor
-        lang="css"
-        :code="css"
-        class="editor"
-        ref="cssEditor"
-        @change="handleCssChange"
-      />
+      <template v-if="wrapperAreas.includes('html')">
+        <h2 v-if="showAreaType">html</h2>
+        <Editor
+          class="editor"
+          @change="handleChange"
+          ref="htmlEditor"
+          v-if="$slots.default"
+        >
+          <slot />
+        </Editor>
+        <Editor
+          v-else
+          :code="html"
+          class="editor"
+          ref="htmlEditor"
+          @change="handleChange"
+        />
+      </template>
+      <template v-if="wrapperAreas.includes('css')">
+        <h2 v-if="showAreaType">css</h2>
+        <Editor
+          lang="css"
+          :code="css"
+          class="editor"
+          ref="cssEditor"
+          @change="handleCssChange"
+        />
+      </template>
     </div>
     <div>
       <html-preview
@@ -70,6 +72,12 @@ export default {
     css: {
       default: "",
     },
+    areas: {
+      default: () => ["html", "css"],
+    },
+    controlBtns: {
+      default: () => ["format", "fullscreen", "save"],
+    },
   },
   data() {
     return {
@@ -85,6 +93,21 @@ export default {
     },
     allCssCode() {
       return this.styleInHtml + this.css;
+    },
+    wrapperAreas() {
+      return typeof this.areas === "string" // && this.isWc
+        ? // ? JSON.stringify(this.areas)
+          this.areas.split(",").map((x) => x.trim())
+        : this.areas;
+    },
+    wrapperControlBtns() {
+      return typeof this.controlBtns === "string" // && this.isWc
+        ? // ? JSON.stringify(this.controlBtns)
+          this.controlBtns.split(",").map((x) => x.trim())
+        : this.controlBtns;
+    },
+    showAreaType() {
+      return this.wrapperAreas.length > 1;
     },
   },
   mounted() {},

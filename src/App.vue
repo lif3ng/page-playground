@@ -33,6 +33,13 @@
       html="<div>a</div><style>div{color:blue}</style>"
       css="div{background:red}"
     />
+    <Playground :areas="['html']">
+      <ol>
+        <li>a</li>
+        <li>a</li>
+        <li>a</li>
+      </ol>
+    </Playground>
   </div>
 </template>
 <script>
