@@ -1,6 +1,11 @@
 {
   "name": "page-playground",
-  "version": "0.1.6",
+  "version": "0.1.7",
+  "files": [
+    "dist",
+    "wcdist",
+    "src"
+  ],
   "main": "dist/plugin.umd.js",
   "scripts": {
     "serve": "vue-cli-service serve",

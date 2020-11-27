@@ -4,9 +4,9 @@
 name: Node.js Package
 
 on:
-  push
-#   release:
-#     types: [created]
+  # push
+  release:
+    types: [created]
 
 jobs:
   build-and-publish:
@@ -20,7 +20,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: yarn
       - run: yarn build-all
-#       - run: npm test
+      #       - run: npm test
       - run: npm config list
       - run: npm publish
         env:
