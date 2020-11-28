@@ -158,8 +158,8 @@ export default {
       }
     },
     handleFormat() {
-      this.$refs.htmlEditor.format();
-      this.$refs.cssEditor.format();
+      this.$refs.htmlEditor?.format();
+      this.$refs.cssEditor?.format();
     },
     handleSave() {
       this.handleFormat();
