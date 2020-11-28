@@ -21,6 +21,8 @@
   "dependencies": {
     "@codemirror/next": "^0.14.0",
     "core-js": "^3.6.5",
+    "husky": "^4.3.0",
+    "pretty-quick": "^3.1.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
