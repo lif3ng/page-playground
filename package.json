@@ -1,6 +1,6 @@
 {
   "name": "page-playground",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "files": [
     "dist",
     "wcdist",
@@ -20,9 +20,12 @@
   },
   "dependencies": {
     "@codemirror/next": "^0.14.0",
+    "autoprefixer": "^9",
     "core-js": "^3.6.5",
     "husky": "^4.3.0",
+    "postcss": "^7",
     "pretty-quick": "^3.1.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "vue": "^2.6.11"
   },
   "devDependencies": {

@@ -1,58 +1,60 @@
 <template>
   <div class="playground">
     <ContralBar
-      class="control"
+      class="control flex"
       @format="handleFormat"
       @fullscreen="handleFullScreen(true)"
       @exit_fullscreen="handleFullScreen(false)"
       @save="handleSave"
       :btns="wrapperControlBtns"
     />
-    <div>
-      <template v-if="wrapperAreas.includes('html')">
-        <h2 v-if="showAreaType">html</h2>
-        <Editor
-          class="editor"
-          @change="handleChange"
-          ref="htmlEditor"
-          v-if="$slots.default"
-        >
-          <slot />
-        </Editor>
-        <Editor
+    <div class="flex space-x-4">
+      <div class="flex flex-col flex-1">
+        <template v-if="wrapperAreas.includes('html')">
+          <h2 v-if="showAreaType">html</h2>
+          <Editor
+            class="editor"
+            @change="handleChange"
+            ref="htmlEditor"
+            v-if="$slots.default"
+          >
+            <slot />
+          </Editor>
+          <Editor
+            v-else
+            :code="html"
+            class="editor"
+            ref="htmlEditor"
+            @change="handleChange"
+          />
+        </template>
+        <template v-if="wrapperAreas.includes('css')">
+          <h2 v-if="showAreaType">css</h2>
+          <Editor
+            lang="css"
+            :code="css"
+            class="editor"
+            ref="cssEditor"
+            @change="handleCssChange"
+          />
+        </template>
+      </div>
+      <div class="flex-1">
+        <html-preview
+          class="preview"
+          ref="previewShadow"
+          v-if="isWc"
+          v-html="previewHtml"
+        />
+        <Preview
+          class="preview"
           v-else
-          :code="html"
-          class="editor"
-          ref="htmlEditor"
-          @change="handleChange"
+          ref="previewDom"
+          :demoNum="demoNum"
+          v-html="previewHtml"
+          :css="cssToRender"
         />
-      </template>
-      <template v-if="wrapperAreas.includes('css')">
-        <h2 v-if="showAreaType">css</h2>
-        <Editor
-          lang="css"
-          :code="css"
-          class="editor"
-          ref="cssEditor"
-          @change="handleCssChange"
-        />
-      </template>
-    </div>
-    <div>
-      <html-preview
-        class="preview"
-        ref="previewShadow"
-        v-if="isWc"
-        v-html="previewHtml"
-      />
-      <Preview
-        class="preview"
-        v-else
-        ref="previewDom"
-        :demoNum="demoNum"
-        v-html="previewHtml"
-        :css="cssToRender"
-      />
+      </div>
     </div>
   </div>
 </template>
@@ -172,27 +174,13 @@ export default {
   },
 };
 </script>
+<style lang="css">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+</style>
 <style lang="stylus" scoped>
 .playground {
-  display: flex;
-  padding-top: 30px;
-  position: relative;
-
-  .control {
-    position: absolute;
-    top: 0;
-  }
-
-  >div {
-    flex: 1;
-    width: 100%;
-    outline: 1px solid #ccc;
-
-    &:last-child {
-      margin-left: 10px;
-    }
-  }
-
   >>>.exit_fullscreen {
     display: none;
   }

@@ -1,9 +1,12 @@
 <template>
-  <div>
+  <div class="space-x-2">
     <button
       v-for="({ text, type }, i) in showBtnsData"
       :key="i"
-      :class="type"
+      :class="[
+        type,
+        'rounded py-1 px-2 bg-blue-300 focus:outline-none hover:bg-blue-400',
+      ]"
       @click="handleClick(type)"
     >
       {{ text }}
