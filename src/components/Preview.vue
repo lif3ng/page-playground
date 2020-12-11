@@ -1,5 +1,8 @@
 <template>
-  <div :id="demoNum ? `demo-${demoNum}` : 'demo'">
+  <div
+    class="m-1 ring border-blue-300"
+    :id="demoNum ? `demo-${demoNum}` : 'demo'"
+  >
     <slot />
   </div>
 </template>

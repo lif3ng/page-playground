@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="focus-within:ring focus-within:border-blue-300 m-1">
     <ControlBar v-if="bar" @format="format" />
     <div ref="editor"></div>
     <div ref="originSlot" style="display: none"><slot /></div>
@@ -45,6 +45,11 @@ export default {
     let startState = EditorState.create({
       doc: "",
       extensions: [
+        [
+          EditorView.baseTheme({
+            $$focused$wrap: { outline: "none" },
+          }),
+        ],
         StateField.define({
           create() {
             return 0;

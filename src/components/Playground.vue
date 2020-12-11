@@ -9,7 +9,7 @@
       :btns="wrapperControlBtns"
     />
     <div class="flex space-x-4">
-      <div class="flex flex-col flex-1">
+      <div class="flex flex-col flex-1 overflow-x-auto">
         <template v-if="wrapperAreas.includes('html')">
           <h2 v-if="showAreaType">html</h2>
           <Editor
@@ -39,7 +39,7 @@
           />
         </template>
       </div>
-      <div class="flex-1">
+      <div class="flex-1 overflow-x-auto">
         <html-preview
           class="preview"
           ref="previewShadow"
