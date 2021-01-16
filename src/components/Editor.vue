@@ -9,14 +9,10 @@
 // import { EditorState } from "@codemirror/next/state";
 // import { EditorView, keymap } from "@codemirror/next/view";
 // import { defaultKeymap } from "@codemirror/next/commands";
-import {
-  EditorState,
-  EditorView,
-  basicSetup,
-} from "@codemirror/next/basic-setup";
-import { StateField } from "@codemirror/next/state";
-import { html } from "@codemirror/next/lang-html";
-import { css } from "@codemirror/next/lang-css";
+import { EditorState, EditorView, basicSetup } from "@codemirror/basic-setup";
+import { StateField } from "@codemirror/state";
+import { html } from "@codemirror/lang-html";
+import { css } from "@codemirror/lang-css";
 import ControlBar from "./ControlBar";
 import { format } from "../utils";
 import getRootMixin from "../getRootMixin";
@@ -46,7 +42,19 @@ export default {
       doc: "",
       extensions: [
         [
+          EditorView.editorAttributes.of({ language: this.lang }),
           EditorView.baseTheme({
+            "$:before": {
+              position: "absolute",
+              right: 0,
+              content: `attr(language)`,
+              opacity: 0.3,
+              fontSize: 1.2,
+              fontWight: "fold",
+              background: "#def",
+              zIndex: 1,
+            },
+            // "$ $selectionBackground": { background: "blue !important" },
             $$focused$wrap: { outline: "none" },
           }),
         ],
@@ -65,10 +73,13 @@ export default {
         ...(this.lang === "css" ? [css()] : []),
       ],
     });
+    const div = document.createElement("div");
+    div.setAttribute("a", "b");
     this.view = new EditorView({
       state: startState,
       parent: this.$refs.editor,
       root: this.getRoot(),
+      dom: div,
     });
     const codeStr = this.$refs.originSlot.innerHTML || this.code;
     this.format(codeStr);

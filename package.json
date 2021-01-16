@@ -1,6 +1,6 @@
 {
   "name": "page-playground",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "files": [
     "dist",
     "wcdist",
@@ -19,7 +19,11 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@codemirror/basic-setup": "^0.17.1",
+    "@codemirror/lang-css": "^0.17.1",
+    "@codemirror/lang-html": "^0.17.1",
     "@codemirror/next": "^0.14.0",
+    "@codemirror/state": "^0.17.1",
     "autoprefixer": "^9",
     "core-js": "^3.6.5",
     "husky": "^4.3.0",

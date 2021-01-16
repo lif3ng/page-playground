@@ -11,7 +11,7 @@
     <div class="flex space-x-4">
       <div class="flex flex-col flex-1 overflow-x-auto">
         <template v-if="wrapperAreas.includes('html')">
-          <h2 v-if="showAreaType">html</h2>
+          <!-- <h2 v-if="showAreaType">html</h2> -->
           <Editor
             class="editor"
             @change="handleChange"
@@ -29,7 +29,7 @@
           />
         </template>
         <template v-if="wrapperAreas.includes('css')">
-          <h2 v-if="showAreaType">css</h2>
+          <!-- <h2 v-if="showAreaType">css</h2> -->
           <Editor
             lang="css"
             :code="css"
@@ -175,7 +175,7 @@ export default {
 };
 </script>
 <style lang="css">
-@tailwind base;
+/* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
 </style>
