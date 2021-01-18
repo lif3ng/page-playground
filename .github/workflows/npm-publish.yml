@@ -5,8 +5,9 @@ name: Node.js Package
 
 on:
   # push
-  release:
-    types: [created]
+  # release:
+  #   types: [created]
+  create # new tag
 
 jobs:
   build-and-publish:
