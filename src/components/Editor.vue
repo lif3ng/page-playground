@@ -30,6 +30,9 @@ export default {
     code: {
       default: "",
     },
+    preventFormat: {
+      type: Boolean,
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -91,7 +94,9 @@ export default {
     format(str) {
       const originCode = str || this.currentCode();
       const currentLen = this.view.state.doc.length;
-      const targetCode = format(originCode, this.lang);
+      const targetCode = this.preventFormat
+        ? originCode
+        : format(originCode, this.lang);
       const newState = this.view.state.update({
         changes: { from: 0, to: currentLen, insert: targetCode },
       });

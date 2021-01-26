@@ -1,5 +1,16 @@
 <template>
   <div id="app">
+    <h1>CSS value comparison</h1>
+    <CssComparisonTable
+      html="<div>x</div>"
+      css="div{width:100px;}"
+      :cssTpl="
+        `div{
+  text-align:{{}}
+}`
+      "
+      :cssValueList="['left', 'right', 'center']"
+    />
     <h1>Editor</h1>
     <Editor bar>
       some text
@@ -46,13 +57,14 @@
 import Editor from "./components/Editor.vue";
 import Preview from "./components/Preview.vue";
 import Playground from "./components/Playground.vue";
-
+import CssComparisonTable from "./components/CssComparisonTable.vue";
 export default {
   name: "App",
   components: {
     Editor,
     Preview,
     Playground,
+    CssComparisonTable,
   },
 };
 </script>
