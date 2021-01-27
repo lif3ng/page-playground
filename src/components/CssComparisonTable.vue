@@ -67,6 +67,7 @@ import PreviewTable from "./PreviewTable";
 import Editor from "./Editor";
 import ControlBar from "./ControlBar";
 export default {
+  name: "CssComparisonTable",
   components: { Editor, PreviewTable, ControlBar },
   props: ["html", "css", "cssTpl", "cssValueList"],
   data() {
