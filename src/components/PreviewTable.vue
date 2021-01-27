@@ -30,10 +30,14 @@
           <input
             v-if="isEdit"
             v-model="inputValue"
-            @keyup.enter="saveTplItem"
+            ref="input"
+            @keydown.tab="saveTplItem"
+            @keyup.enter="saveTplItem($event, true)"
             @keyup.esc="isEdit = false"
           />
-          <button v-else @click="isEdit = true">+</button>
+          <button v-else @click="handleAddItem">
+            +
+          </button>
         </td>
       </tr>
     </tbody>
@@ -57,12 +61,20 @@ export default {
       return this.edit ? this.innerList.map(this.getCssFn) : this.cssList;
     },
   },
+  watch: {
+    innerList(v) {
+      this.$emit("list-update", v);
+    },
+  },
   methods: {
-    saveTplItem() {
+    saveTplItem(e, exit) {
+      e.preventDefault();
       if (this.inputValue) {
         this.innerList.push(this.inputValue);
         this.inputValue = "";
-        this.isEdit = "false";
+      }
+      if (exit) {
+        this.isEdit = false;
       }
     },
     deleteItem(i) {
@@ -71,6 +83,12 @@ export default {
     moveItemUp(i) {
       const item = this.innerList.splice(i, 1);
       this.innerList.splice(i - 1, 0, ...item);
+    },
+    handleAddItem() {
+      this.isEdit = true;
+      this.$nextTick(() => {
+        this.$refs.input.focus();
+      });
     },
   },
 };

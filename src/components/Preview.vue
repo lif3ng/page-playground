@@ -14,7 +14,6 @@ export default {
     return { adoptedStyleSheetIndex: -1 };
   },
   mounted() {
-    console.log({ demoNum: this.demoNum });
     this.$nextTick(() => {
       // console.log(+new Date(), "preview el", this.$el, this.$el.getRootNode());
     });
@@ -24,12 +23,8 @@ export default {
       const sheet = new CSSStyleSheet();
       sheet.replaceSync(str);
       sheet.rules.forEach((rule) => {
-        console.log("before selectorText", rule.selectorText);
-        console.log(`#demo-${this.demoNum} ${rule.selectorText}`);
         rule.selectorText = `#demo-${this.demoNum} ${rule.selectorText}`;
-        console.log("after selectorText", rule.selectorText);
       });
-      console.log(sheet);
       const sheets = document.adoptedStyleSheets;
       if (this.adoptedStyleSheetIndex !== -1) {
         document.adoptedStyleSheets = [
@@ -49,7 +44,6 @@ export default {
     css: {
       immediate: true,
       handler(css) {
-        console.log("css:", css);
         if (css) {
           this.renderCss(css);
         }

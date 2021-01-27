@@ -1,14 +1,22 @@
 <template>
   <div>
+    <ControlBar v-if="edit" :btns="['save']" @save="handleSave" />
     <!-- base html, base css -->
     <div v-if="edit" style="display:flex">
       <Editor
         lang="html"
         :code="html"
+        ref="htmlEditor"
         @change="handleHtmlChange"
         style="flex:1"
       />
-      <Editor lang="css" :code="css" style="flex:1" @change="handleCssChange" />
+      <Editor
+        lang="css"
+        :code="css"
+        style="flex:1"
+        @change="handleCssChange"
+        ref="cssEditor"
+      />
       <div style="flex:1">
         <p>tpl</p>
         <Editor
@@ -47,6 +55,7 @@
         :cssList="cssValueList.map(getValueCss)"
         :getCssFn="getValueCss"
         :edit="edit"
+        @list-update="(v) => (listLocal = v)"
         style="margin-top: 1em"
       />
     </div>
@@ -56,15 +65,21 @@
 <script>
 import PreviewTable from "./PreviewTable";
 import Editor from "./Editor";
+import ControlBar from "./ControlBar";
 export default {
-  components: { Editor, PreviewTable },
+  components: { Editor, PreviewTable, ControlBar },
   props: ["html", "css", "cssTpl", "cssValueList"],
   data() {
-    return { htmlStr: "", cssStr: "", cssTplStr: "", edit: true };
+    return {
+      htmlStr: "",
+      cssStr: "",
+      cssTplStr: "",
+      listLocal: [],
+      edit: true,
+    };
   },
   computed: {
     _cssTpl() {
-      console.log((this.cssTplStr || this.cssTpl).split("{{}}"));
       return (this.cssTplStr || this.cssTpl).split("{{}}");
     },
   },
@@ -83,6 +98,16 @@ export default {
     },
     handleTplChange(tpl) {
       this.cssTplStr = tpl;
+    },
+    handleSave() {
+      this.$refs.htmlEditor.format();
+      this.$refs.cssEditor.format();
+      this.$emit("save", {
+        html: this.htmlStr,
+        css: this.cssStr,
+        cssTpl: this.cssTplStr,
+        cssValueList: this.listLocal,
+      });
     },
   },
 };
