@@ -95,10 +95,13 @@ export default {
 </script>
 <style scoped lang="stylus">
 tr {
+  background: transparent;
   td{
+    padding: 0;
+    border: none;
     &:first-child{
       vertical-align: top
-      padding 3px 0 0 10px
+      padding 0.2em 0 0 10px
       border: 1px solid #ccc;
       border-width: 0 0 1px 1px;
       border-radius: 0 0 0 10px;

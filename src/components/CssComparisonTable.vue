@@ -27,7 +27,7 @@
         />
       </div>
     </div>
-    <details open v-else>
+    <details v-else>
       <summary>基础代码</summary>
       <div style="display:flex">
         <Editor
@@ -46,10 +46,7 @@
     </details>
     <!-- css tpl and table -->
     <div style="display: flex;font-size:1em;">
-      <div
-        v-html="_cssTpl[0]"
-        style="display: inline-block;white-space:pre-wrap"
-      />
+      <div v-html="_cssTpl[0]" class="pre" />
       <PreviewTable
         :html="htmlStr"
         :cssList="cssValueList.map(getValueCss)"
@@ -59,7 +56,7 @@
         style="margin-top: 1em"
       />
     </div>
-    <pre v-html="_cssTpl[1]" />
+    <div v-html="_cssTpl[1]" class="pre" />
   </div>
 </template>
 <script>
@@ -118,3 +115,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.pre {
+  white-space: pre-wrap;
+}
+</style>
