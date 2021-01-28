@@ -69,14 +69,19 @@ import ControlBar from "./ControlBar";
 export default {
   name: "CssComparisonTable",
   components: { Editor, PreviewTable, ControlBar },
-  props: ["html", "css", "cssTpl", "cssValueList"],
+  props: {
+    html: String,
+    css: String,
+    cssTpl: { type: String, default: "" },
+    cssValueList: Array,
+    edit: Boolean,
+  },
   data() {
     return {
       htmlStr: "",
       cssStr: "",
       cssTplStr: "",
       listLocal: [],
-      edit: true,
     };
   },
   computed: {

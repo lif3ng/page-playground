@@ -1,5 +1,17 @@
 <template>
   <div id="app">
+    <h1>CSS value comparison(edit)</h1>
+    <CssComparisonTable
+      html="<div>x</div>"
+      css="div{width:100px;}"
+      edit
+      :cssTpl="
+        `div{
+  text-align:{{}}
+}`
+      "
+      :cssValueList="['left', 'right', 'center']"
+    />
     <h1>CSS value comparison</h1>
     <CssComparisonTable
       html="<div>x</div>"

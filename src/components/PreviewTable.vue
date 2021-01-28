@@ -1,5 +1,5 @@
 <template>
-  <table style="display: inline-block">
+  <table style="border-collapse: separate">
     <tbody>
       <tr v-for="([v, css], index) in list" :key="index">
         <td>
@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       demoNum: parseInt(Math.random() * 10000000),
-      innerList: [],
+      innerList: this.$props.cssList ? this.$props.cssList.map(([x]) => x) : [],
       isEdit: false,
       inputValue: "",
     };
@@ -96,12 +96,12 @@ export default {
 <style scoped lang="stylus">
 tr {
   td{
-    border-bottom: 1px solid #ccc
     &:first-child{
-      padding-left 10px
+      vertical-align: top
+      padding 3px 0 0 10px
       border: 1px solid #ccc;
-      border-width: 0 0 1px 1px
-      border-radius: 0 0 0 10px
+      border-width: 0 0 1px 1px;
+      border-radius: 0 0 0 10px;
     }
   }
 }
