@@ -1,16 +1,16 @@
 <template>
-  <table style="border-collapse: separate">
+  <table class="border-separate overflow-visible">
     <tbody>
       <tr v-for="([v, css], index) in list" :key="index">
         <td>
           {{ v }}
 
-          <button v-if="edit" style="float:right" @click="deleteItem(index)">
+          <button v-if="edit" style="float: right" @click="deleteItem(index)">
             x
           </button>
           <button
             v-if="edit && index !== 0"
-            style="float:right"
+            style="float: right"
             @click="moveItemUp(index)"
           >
             ^
@@ -35,9 +35,7 @@
             @keyup.enter="saveTplItem($event, true)"
             @keyup.esc="isEdit = false"
           />
-          <button v-else @click="handleAddItem">
-            +
-          </button>
+          <button v-else @click="handleAddItem">+</button>
         </td>
       </tr>
     </tbody>
@@ -96,12 +94,14 @@ export default {
 <style scoped lang="stylus">
 tr {
   background: transparent;
-  td{
+
+  td {
     padding: 0;
     border: none;
-    &:first-child{
-      vertical-align: top
-      padding 0.2em 0 0 10px
+
+    &:first-child {
+      vertical-align: top;
+      padding: 0.2em 0 0 10px;
       border: 1px solid #ccc;
       border-width: 0 0 1px 1px;
       border-radius: 0 0 0 10px;
