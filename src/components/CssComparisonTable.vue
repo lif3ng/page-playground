@@ -2,22 +2,22 @@
   <div>
     <ControlBar v-if="edit" :btns="['save']" @save="handleSave" />
     <!-- base html, base css -->
-    <div v-if="edit" style="display:flex">
+    <div v-if="edit" style="display: flex">
       <Editor
         lang="html"
         :code="html"
         ref="htmlEditor"
         @change="handleHtmlChange"
-        style="flex:1"
+        style="flex: 1"
       />
       <Editor
         lang="css"
         :code="css"
-        style="flex:1"
+        style="flex: 1"
         @change="handleCssChange"
         ref="cssEditor"
       />
-      <div style="flex:1">
+      <div style="flex: 1">
         <p>tpl</p>
         <Editor
           lang="css"
@@ -29,23 +29,23 @@
     </div>
     <details v-else>
       <summary>基础代码</summary>
-      <div style="display:flex">
+      <div style="display: flex">
         <Editor
           lang="html"
           :code="html"
           @change="handleHtmlChange"
-          style="flex:1"
+          style="flex: 1"
         />
         <Editor
           lang="css"
           :code="css"
-          style="flex:1"
+          style="flex: 1"
           @change="handleCssChange"
         />
       </div>
     </details>
     <!-- css tpl and table -->
-    <div style="display: flex;font-size:1em;">
+    <div style="display: flex; font-size: 1em">
       <div v-html="_cssTpl[0]" class="pre" />
       <PreviewTable
         :html="htmlStr"
@@ -67,10 +67,13 @@ export default {
   name: "CssComparisonTable",
   components: { Editor, PreviewTable, ControlBar },
   props: {
-    html: String,
-    css: String,
+    html: { type: String, default: "" },
+    css: { type: String, default: "" },
     cssTpl: { type: String, default: "" },
-    cssValueList: Array,
+    cssValueList: {
+      type: Array,
+      default: () => [],
+    },
     edit: Boolean,
   },
   data() {
