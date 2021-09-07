@@ -45,6 +45,7 @@ export default {
       doc: "",
       extensions: [
         [
+          EditorView.lineWrapping,
           EditorView.editorAttributes.of({ language: this.lang }),
           EditorView.baseTheme({
             "$:before": {
