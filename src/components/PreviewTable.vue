@@ -1,6 +1,17 @@
 <template>
   <table class="border-separate overflow-visible">
     <tbody>
+      <tr>
+        <td>
+          render type:
+          <select v-model="selectedRenderType">
+            <option v-for="(type, i) in renderTypeList" :key="i">{{
+              type
+            }}</option>
+          </select>
+          {{ selectedRenderType }}
+        </td>
+      </tr>
       <tr v-for="([v, css], index) in list" :key="index">
         <td>
           {{ v }}
@@ -21,7 +32,8 @@
           <Preview
             :demoNum="`${demoNum}-${index}`"
             :css="css"
-            v-html="html"
+            :html="html"
+            :renderType="selectedRenderType"
           ></Preview>
         </td>
       </tr>
@@ -52,6 +64,8 @@ export default {
       innerList: this.$props.cssList ? this.$props.cssList.map(([x]) => x) : [],
       isEdit: false,
       inputValue: "",
+      renderTypeList: ["dom", "iframe"],
+      selectedRenderType: "dom",
     };
   },
   computed: {
