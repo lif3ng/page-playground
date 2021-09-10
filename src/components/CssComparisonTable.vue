@@ -8,16 +8,16 @@
         :code="html"
         ref="htmlEditor"
         @change="handleHtmlChange"
-        style="flex: 1"
+        class="flex-1 overflow-x-auto"
       />
       <Editor
         lang="css"
         :code="css"
-        style="flex: 1"
+        class="flex-1 overflow-x-auto"
         @change="handleCssChange"
         ref="cssEditor"
       />
-      <div style="flex: 1">
+      <div class="flex-1 overflow-x-auto">
         <p>tpl</p>
         <Editor
           lang="css"
@@ -34,12 +34,12 @@
           lang="html"
           :code="html"
           @change="handleHtmlChange"
-          style="flex: 1"
+          class="flex-1 overflow-x-auto"
         />
         <Editor
           lang="css"
           :code="css"
-          style="flex: 1"
+          class="flex-1 overflow-x-auto"
           @change="handleCssChange"
         />
       </div>
